@@ -2,7 +2,6 @@
 
 class Request
 {
-
     public $status_codes = [
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -44,6 +43,19 @@ class Request
 
     ];
 
+    public function getProtocol()
+    {
+        return $_SERVER['SERVER_PROTOCOL'];
+    }
+
+    public function getStatusCodeText($status_code)
+    {
+        if (array_key_exists($status_code, $this->status_codes))
+            $this->status_codes[$status_code];
+
+        throw  new HttpException('Unknown status code');
+
+    }
 
     public function getHeaders()
     {
