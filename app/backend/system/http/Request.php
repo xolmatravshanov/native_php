@@ -64,7 +64,7 @@ class Request
 
     public function getHeader($name)
     {
-
+        
     }
 
     public function getStatusCode()
