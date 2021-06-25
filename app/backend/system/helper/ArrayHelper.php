@@ -99,5 +99,15 @@ class ArrayHelper
 
     }
 
+    /**
+     * @param array $array
+     * @param $item
+     * @param false $strick
+     * @return bool
+     */
+    public static function isIn(array $array, $item, $strick = false): bool
+    {
+        return in_array($item, $array, $strick);
+    }
 
 }
