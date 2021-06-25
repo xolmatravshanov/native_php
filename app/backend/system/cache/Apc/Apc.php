@@ -1,7 +1,9 @@
 <?php
 
 
-class Apc
+use App\Backend\System\Cache\CacheInterface\CacheInterface;
+
+class Apc implements CacheInterface
 {
 
     public function __construct()

@@ -2,9 +2,10 @@
 
 namespace App\Backend\System\Cache\Memcache;
 
+use App\Backend\System\Cache\CacheInterface\CacheInterface;
 use Memcache;
 
-class Mem
+class Mem implements CacheInterface
 {
     /**
      * @var int
@@ -35,22 +36,25 @@ class Mem
 
     public static function set($key, $value, $expiry)
     {
-        return apc_add($key, $value, $expiry);
+        $this->client->set($key, $value, 0, $expiry);
     }
 
     public static function get($key)
     {
-
+        $this->client->get($key);
     }
 
     public static function exists($key)
     {
-        return apc_exists($key);
+        if ($this->client->get($key))
+            return true;
+
+        return false;
     }
 
     public static function delete($key)
     {
-        self::exists($key);
+        $this->client->delete($key);
     }
 
 

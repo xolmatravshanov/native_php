@@ -9,7 +9,7 @@ interface CacheInterface
      * @param $key
      * @return mixed
      */
-    public function get($key);
+    public static function get($key);
 
     /**
      * @param $key
@@ -17,17 +17,17 @@ interface CacheInterface
      * @param $expiry
      * @return mixed
      */
-    public function set($key, $value, $expiry);
+    public static function set($key, $value, $expiry);
 
     /**
      * @param $key
      * @return mixed
      */
-    public function delete($key);
+    public static function delete($key);
 
     /**
      * @param $key
      * @return mixed
      */
-    public function exists($key);
+    public static function exists($key);
 }
