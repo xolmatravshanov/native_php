@@ -12,23 +12,45 @@ class Apc implements CacheInterface
 
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @param $expiry
+     * @return bool|mixed
+     */
     public static function set($key, $value, $expiry)
     {
         return apc_add($key, $value, $expiry);
     }
 
+    /**
+     * @param $key
+     * @return false|mixed
+     */
     public static function get($key)
     {
-
+        return apc_fetch($key);
     }
 
-    public static function exists($key)
+    /**
+     * @param $key
+     * @return bool
+     */
+    public static function exists($key): bool
     {
         return apc_exists($key);
     }
 
-    public static function delete($key)
+    /**
+     * @param $key
+     * @return bool
+     */
+    public static function delete($key): bool
     {
-        self::exists($key);
+        if (!self::exists($key))
+            return false;
+
+        return apc_delete($key);
+
     }
 }
