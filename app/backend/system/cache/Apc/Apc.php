@@ -19,7 +19,7 @@ class Apc implements CacheInterface
      * @return bool|mixed
      */
     public static function set($key, $value, $expiry)
-    {
+    {       //$expiry =  time() + 86400;
         return apc_add($key, $value, $expiry);
     }
 
