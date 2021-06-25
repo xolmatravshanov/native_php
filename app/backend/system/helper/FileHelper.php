@@ -1,7 +1,16 @@
 <?php
 
+namespace App\Backend\System\Helper;
+
+
+use InvalidArgumentException;
+
 class FileHelper
 {
+    /**
+     * @param string $path
+     * @return string
+     */
     public static function normilize(string $path): string
     {
         if (!$path && is_dir($path))
@@ -10,6 +19,10 @@ class FileHelper
         return str_replace('\\', DIRECTORY_SEPARATOR, $path);
     }
 
+    /**
+     * @param string $path
+     * @return string
+     */
     public static function getSubDirs(string $path): string
     {
 
@@ -18,6 +31,10 @@ class FileHelper
     }
 
 
+    /**
+     * @param string $path
+     * @return string
+     */
     public static function scanDir(string $path): string
     {
         $path = self::normilize($path);

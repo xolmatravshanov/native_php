@@ -50,10 +50,10 @@ class Request
 
     public function getStatusCodeText($status_code)
     {
-        if (array_key_exists($status_code, $this->status_codes))
-            $this->status_codes[$status_code];
+        if (!array_key_exists($status_code, $this->status_codes))
+            throw  new HttpException('Unknown status code');
 
-        throw  new HttpException('Unknown status code');
+        return $this->status_codes[$status_code];
 
     }
 
@@ -64,7 +64,7 @@ class Request
 
     public function getHeader($name)
     {
-        
+
     }
 
     public function getStatusCode()
