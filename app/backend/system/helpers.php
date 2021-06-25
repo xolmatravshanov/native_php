@@ -36,7 +36,3 @@ function autoloadNamespace($className){
     require $fileName;
 }
 
-function normalize()
-{
-
-}
