@@ -27,14 +27,14 @@ class Html
     public function sanitizeInt($input)
     {
         /*FILTER_VALIDATE_INT*/
-      /*  $options = array(
-            'options' => array(
-                'min_range' => 5,
-                'max_range' => 10,
-            )
-        );
-        var_dump(filter_var('5', FILTER_VALIDATE_INT, $options));
-        */
+        /*  $options = array(
+              'options' => array(
+                  'min_range' => 5,
+                  'max_range' => 10,
+              )
+          );
+          var_dump(filter_var('5', FILTER_VALIDATE_INT, $options));
+          */
         return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
     }
 
@@ -59,7 +59,7 @@ class Html
 
     public function sanitizeIp($input)
     {
-       // var_dump(filter_var('185.158.24.24', FILTER_VALIDATE_IP));
+        // var_dump(filter_var('185.158.24.24', FILTER_VALIDATE_IP));
     }
 
     public function sanitizeMac($input)
@@ -67,9 +67,20 @@ class Html
         // var_dump(filter_var('FA-F9-DD-B2-5E-0D', FILTER_VALIDATE_MAC));
     }
 
-
-    public function validate()
+    /**
+     * @param string $url
+     * @return array|false|int|string|null
+     */
+    public function parseUrl(string $url)
     {
+        return parse_url($url);
+        /*
+         *
+         *
+           [scheme] => http
+           [host] => example.com
+           [path] => /project/controller/action/param1/param2
 
+         * */
     }
 }
