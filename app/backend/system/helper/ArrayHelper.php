@@ -28,7 +28,51 @@ class ArrayHelper
         }, $array);
     }
 
+    public static function sort(array $array, $option = SORT_DESC, $deepth = 3)
+    {
+        $option = [
+            'key' => 3,
+            'value' => 2,
+            'array' => 1,
+            'option' => 'option'
+        ];
 
 
+        switch ($option) {
+            //  Sort Array in Ascending Order - sort()
+            case SORT_ASC && $deepth == 1:
+                sort($array);
+                break;
+            //Sort Array in Descending Order - rsort()
+            case SORT_DESC && $deepth == 1:
+                rsort($array);
+                break;
+
+            //Sort Array (Ascending Order), According to Value - asort()
+            case SORT_ASC && $deepth == 2:
+                asort($array);
+                break;
+
+            //  Sort Array (Descending Order), According to Value - arsort()
+            case SORT_DESC && $deepth == 2:
+                arsort($array);
+                break;
+
+
+            //Sort Array (Ascending Order), According to Key - ksort()
+            case SORT_ASC && $deepth == 3:
+                ksort($array);
+                break;
+
+            //Sort Array (Descending Order), According to Key - krsort()
+            case SORT_DESC && $deepth == 3:
+                krsort($array);
+                break;
+
+        }
+
+        return $array;
+
+    }
 
 }
