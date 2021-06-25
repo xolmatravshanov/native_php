@@ -20,7 +20,7 @@ class Mem implements CacheInterface
     /**
      * @var Memcache
      */
-    protected $client = null;
+    protected static $client = null;
 
     public function __construct()
     {
@@ -29,24 +29,24 @@ class Mem implements CacheInterface
 
     protected function connect()
     {
-        $this->client = new Memcache();
-        $this->client->connect($this->host, $this->port);
+        self::$client = new Memcache();
+        self::$client->connect($this->host, $this->port);
     }
 
 
     public static function set($key, $value, $expiry)
     {
-        $this->client->set($key, $value, 0, $expiry);
+        self::$client->set($key, $value, 0, $expiry);
     }
 
     public static function get($key)
     {
-        $this->client->get($key);
+        self::$client->get($key);
     }
 
     public static function exists($key)
     {
-        if ($this->client->get($key))
+        if (self::$client->get($key))
             return true;
 
         return false;
@@ -54,7 +54,7 @@ class Mem implements CacheInterface
 
     public static function delete($key)
     {
-        $this->client->delete($key);
+        self::$client->delete($key);
     }
 
 
