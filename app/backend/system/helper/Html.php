@@ -83,4 +83,16 @@ class Html
 
          * */
     }
+
+
+    public function outPut($input)
+    {
+        /*used when outputting data into webpage*/
+        return htmlentities($input);
+    }
+
+    public function stripTags($input)
+    {
+        return strip_tags($input);
+    }
 }
