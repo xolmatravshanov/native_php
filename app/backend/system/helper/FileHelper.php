@@ -96,4 +96,42 @@ class FileHelper
         return $count;
     }
 
+    public function isWritable($file)
+    {
+        return is_writable($file);
+    }
+
+    public function isReadable($file)
+    {
+        return is_readable($file);
+    }
+
+    public function getModifyTime($file)
+    {
+
+        if (!file_exists($file))
+            return false;
+
+        return date("Y-m-d", filemtime($file));
+    }
+
+    public function getPathInfo($path)
+    {
+        return pathinfo($path);
+
+        /*
+         * Array
+                (
+                    [dirname] => /var/www
+                    [basename] => image.png
+                    [extension] => png
+                    [filename] => image
+                )
+         *
+         * */
+    }
+
+
+
+
 }
