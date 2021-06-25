@@ -3,6 +3,7 @@
 namespace App\Backend\System\Helper;
 
 
+use Exception;
 use InvalidArgumentException;
 
 class FileHelper
@@ -53,8 +54,19 @@ class FileHelper
         }
     }
 
+    public function delete(string $file)
+    {
 
+        if (!file_exists($file))
+            return false;
 
+        $success = unlink($file);
+
+        if ($success)
+            return $success;
+
+        throw new Exception("Cannot delete $file");
+    }
 
 
 }
