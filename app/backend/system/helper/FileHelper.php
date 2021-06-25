@@ -131,7 +131,29 @@ class FileHelper
          * */
     }
 
+    public function getMemoryUsage($file)
+    {
+        if (!file_exists($file))
+            return false;
 
+        $start = memory_get_usage(true);
+        $arr = file($file);
+        $end = memory_get_usage(true);
+        return $end - $start;
+
+    }
+
+    public function copy($file, $copy)
+    {
+        if (!file_exists($file))
+            return false;
+
+        if (copy($file, $copy))
+            return true;
+
+        return false;
+
+    }
 
 
 }
