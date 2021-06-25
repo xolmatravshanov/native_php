@@ -15,6 +15,20 @@ class ArrayHelper
 
     public static function map($from, $to, array $array)
     {
-        //TODO
+        $result = [];
+        foreach ($array as $item)
+            $result[$item[$from]] = $to;
+        return $result;
     }
+
+    public static function getColumn($column, $array)
+    {
+        return array_map(function ($item) use ($column) {
+            return $item[$column];
+        }, $array);
+    }
+
+
+
+
 }
