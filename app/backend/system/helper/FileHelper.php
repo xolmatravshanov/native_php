@@ -69,4 +69,31 @@ class FileHelper
     }
 
 
+    public function recurse_delete_dir(string $dir): int
+    {
+        $count = 0;
+
+        // ensure that $dir ends with a slash so that we can concatenate it with the filenames directly
+        $dir = rtrim($dir, "/\\") . "/";
+
+        // use dir() to list files
+        $list = dir($dir);
+
+        // store the next file name to $file. if $file is false, that's all -- end the loop.
+        while (($file = $list->read()) !== false) {
+            if ($file === "." || $file === "..") continue;
+            if (is_file($dir . $file)) {
+                unlink($dir . $file);
+                $count++;
+            } elseif (is_dir($dir . $file)) {
+                $count += $this->recurse_delete_dir($dir . $file);
+            }
+        }
+
+        // finally, safe to delete directory!
+        rmdir($dir);
+
+        return $count;
+    }
+
 }
