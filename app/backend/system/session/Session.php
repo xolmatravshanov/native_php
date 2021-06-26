@@ -9,7 +9,20 @@ class Session
 
     public static function start()
     {
-        session_start();
+
+        if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start(array(
+                    'cache_limiter' => 'private',
+                    'read_and_close' => true,
+                ));
+            }
+        } else {
+            if (session_id() == '') {
+                session_start();
+            }
+        }
+
     }
 
     public static function set($name, $value)
@@ -52,5 +65,28 @@ class Session
         return true;
     }
 
+
+    /**
+     * close the session, release lock
+     * @return bool|void
+     */
+    public static function close()
+    {
+        return session_write_close();
+    }
+
+    public static function cookieExits()
+    {
+        if (!isset($_COOKIE[session_name()]))
+            return false;
+
+        self::start();
+    }
+
+    public static function setName($name)
+    {
+        session_name($name);
+        self::start();
+    }
 
 }
