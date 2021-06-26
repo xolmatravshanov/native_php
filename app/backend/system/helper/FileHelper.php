@@ -8,14 +8,14 @@ use InvalidArgumentException;
 
 class FileHelper
 {
-    public $uploadStatusCodes =[
-        UPLOAD_ERR_OK,
-        UPLOAD_ERR_INI_SIZE,
-        UPLOAD_ERR_PARTIAL,
-        UPLOAD_ERR_NO_FILE,
-        UPLOAD_ERR_NO_TMP_DIR,
-        UPLOAD_ERR_CANT_WRITE,
-        UPLOAD_ERR_EXTENSION,
+    public $uploadStatusCodes = [
+        UPLOAD_ERR_OK => 'The file uploaded with success.',
+        UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive',
+        UPLOAD_ERR_PARTIAL => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
+        UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
+        UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
+        UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload',
     ];
 
 
@@ -166,5 +166,15 @@ class FileHelper
 
     }
 
+    public function getUploadError()
+    {
+
+
+        $fileError = $_FILES["FILE_NAME"]["error"]; // where FILE_NAME is the name attribute of the file input in your form
+        if (!$fileError)
+            return false;
+
+        return $this->uploadStatusCodes[$fileError];
+    }
 
 }
