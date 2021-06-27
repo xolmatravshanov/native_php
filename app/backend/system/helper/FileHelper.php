@@ -177,4 +177,63 @@ class FileHelper
         return $this->uploadStatusCodes[$fileError];
     }
 
+
+    public function upload()
+    {
+        $_FILES['file']['name'];
+        $_FILES['file']['type'];
+        $_FILES['file']['size'];
+        $_FILES['file']['tmp_name'];
+
+    }
+
+    public function nameNormilize($fileName)
+    {
+        $illegal = array_merge(array_map('chr', range(0, 31)), ["<", ">", ":", '"', "/", "\\", "|", "?", "*", " "]);
+        $filename = str_replace($illegal, "-", $_FILES['file']['name']);
+
+
+        $pathinfo = pathinfo($filename);
+
+        $extension = $pathinfo['extension'] ? $pathinfo['extension'] : '';
+        $filename = $pathinfo['filename'] ? $pathinfo['filename'] : '';
+
+
+        if (!empty($extension) && !empty($filename)) {
+            echo $filename, $extension;
+        } else {
+            die('file is missing an extension or name');
+        }
+    }
+
+    public function validateMime($mime, $extension, $fileName)
+    {
+        if ($mime == 'image/jpeg' && $extension == 'jpeg' || $extension == 'jpg') {
+            if ($img = imagecreatefromjpeg($fileName)) {
+                imagedestroy($img);
+            } else {
+                die('image failed to open, could be corrupt or the file contains something else.');
+            }
+        }
+    }
+
+
+    public function isFiletypeAllowed($extension, $mime, array $allowed)
+    {
+
+        $allowedFiletypes = [
+
+            'image/png' => ['png'],
+            'image/gif' => ['gif'],
+            'image/jpeg' => ['jpg', 'jpeg'],
+
+        ];
+
+        return isset($allowed[$mime]) &&
+            is_array($allowed[$mime]) &&
+            in_array($extension, $allowed[$mime]);
+
+    }
+
+
 }
