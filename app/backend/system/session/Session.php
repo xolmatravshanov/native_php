@@ -89,18 +89,32 @@ class Session
         self::start();
     }
 
-    public static function crf()
+    public static function setCsrf()
     {
         $token = random_bytes(64);
 
         self::start();
 
-        if (self::exits('crf'))
-            return self::get('crf');
+        if (self::exits('csrf'))
+            return self::get('csrf');
 
-        self::set('crf', $token);
+        self::set('csrf', $token);
 
         return $token;
     }
+
+
+    public static function validateCsrf($token)
+    {
+
+        if ($token == self::get('csrf'))
+            return true;
+
+        self::delete('csrf');
+
+        die("CSRF token validation failed");
+
+    }
+
 
 }
