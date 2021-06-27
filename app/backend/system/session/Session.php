@@ -89,4 +89,18 @@ class Session
         self::start();
     }
 
+    public static function crf()
+    {
+        $token = random_bytes(64);
+
+        self::start();
+
+        if (self::exits('crf'))
+            return self::get('crf');
+
+        self::set('crf', $token);
+
+        return $token;
+    }
+
 }
