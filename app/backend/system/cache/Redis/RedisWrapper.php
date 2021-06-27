@@ -9,6 +9,12 @@ class RedisWrapper implements CacheInterface
     private $host = '127.0.0.1';
     private $port = 6379;
 
+    private $commands = [
+        'install' => 'sudo apt install redis-server',
+        'php-redis' => 'sudo apt install php-redis',
+        'restart' => 'sudo service apache2 restart'
+    ];
+
 
     public function __construct(array $config = [])
     {
