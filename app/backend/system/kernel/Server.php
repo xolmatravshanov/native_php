@@ -4,6 +4,7 @@ class Server
 {
 
     private $host = '127.0.0.1';
+
     private $port = 5000;
 
     public function __construct()
