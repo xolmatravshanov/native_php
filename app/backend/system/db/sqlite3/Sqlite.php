@@ -1,7 +1,8 @@
 <?php
 
+use App\Backend\System\Db\BaseDb;
 
-class Sqlite
+class Sqlite extends BaseDb
 {
 
     /**
@@ -9,8 +10,14 @@ class Sqlite
      */
     private $driver = null;
 
+    /**
+     * @var null
+     */
     private $sqliteFile = null;
 
+    /**
+     * @var null
+     */
     private $result = null;
 
 
@@ -28,7 +35,6 @@ class Sqlite
     {
         $this->result = $this->driver->querySingle($query);
     }
-
 
     public function find($query)
     {

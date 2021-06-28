@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Backend\System\Db;
 
 class BaseDb
 {
@@ -38,8 +39,6 @@ class BaseDb
      * @var
      */
     protected $table;
-
-
 
 
 }
