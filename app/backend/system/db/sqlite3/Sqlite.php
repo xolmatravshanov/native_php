@@ -11,6 +11,8 @@ class Sqlite
 
     private $sqliteFile = null;
 
+    private $result = null;
+
 
     public function __construct($sqliteFile)
     {
@@ -22,12 +24,21 @@ class Sqlite
         $this->driver = new SQLite3($this->sqliteFile);
     }
 
-    public function findOne()
+    public function findOne($query)
     {
-        $this->driver->querySingle('SELECT column1Name FROM table WHERE column2Name=1');
+        $this->result = $this->driver->querySingle($query);
     }
 
 
+    public function find($query)
+    {
+        $this->result = $this->driver->query($query);
+    }
+
+    public function toArray()
+    {
+        return $this->result->fetchArray();
+    }
 
 
 }
